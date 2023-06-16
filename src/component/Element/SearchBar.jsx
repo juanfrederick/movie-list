@@ -1,10 +1,9 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValue, fetchMovies } from "../../features/movieSlice";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const { typeValue } = useSelector((store) => store.movies);
+  const { typeValue, page } = useSelector((store) => store.movies);
 
   return (
     <form
@@ -12,7 +11,7 @@ const SearchBar = () => {
       className="form-container"
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch(fetchMovies(typeValue));
+        dispatch(fetchMovies({ typeValue, page }));
       }}
     >
       <input
