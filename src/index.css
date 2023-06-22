@@ -23,8 +23,16 @@
 
 body {
   font-family: "Signika", sans-serif;
-  background-color: var(--col500);
+
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(3, 4, 94, 1) 100%
+  );
   padding-bottom: 2rem;
+  min-height: 100vh;
+  max-width: 100vw;
 }
 
 .home-container {
@@ -81,7 +89,7 @@ body {
 
 .card-parent {
   box-shadow: 5px 5px 15px 5px #caf0f856;
-  background-color: #90e0ef;
+  background-color: var(--col400);
   border-radius: 1rem;
   width: 100vw;
   max-width: 900px;
@@ -98,7 +106,7 @@ body {
 }
 
 .card {
-  background-color: var(--col400);
+  background-color: var(--col500);
   border-radius: 1rem;
   border: solid 2px black;
   height: 25rem;
@@ -128,7 +136,7 @@ body {
 /* Movie Page */
 .detail-container {
   box-shadow: 5px 5px 15px 5px #caf0f856;
-  background-color: #90e0ef;
+  background-color: var(--col400);
   border-radius: 1rem;
   width: 100vw;
   max-width: 900px;
@@ -151,7 +159,7 @@ body {
 td {
   padding: 0.5rem;
   border: 1px solid black;
-  background-color: var(--col400);
+  background-color: var(--col500);
   color: var(--col100);
 }
 
@@ -159,9 +167,30 @@ td {
   font-weight: bold;
 }
 
-@media screen and (max-width: 840px) {
+.button-container button {
+  cursor: pointer;
+  padding: 0.4rem 0;
+  width: 60px;
+  background-color: var(--col400);
+  border-radius: 0.5rem;
+  color: var(--col100);
+  transition: 0.5s;
+}
+
+.button-container button:hover {
+  background-color: var(--col300);
+}
+
+@media screen and (max-width: 1000px) {
   .card-parent {
-    grid-template-columns: repeat(1, 250px);
+    grid-template-columns: repeat(2, 250px);
+    background-color: transparent;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .card {
+    box-shadow: 5px 3px 15px 1px #caf0f856;
   }
 
   .card-parent h2 {
@@ -175,11 +204,19 @@ td {
   .detail-container {
     flex-direction: column;
     align-items: center;
+    background-color: transparent;
+    box-shadow: none;
   }
 }
 
 @media screen and (max-width: 740px) {
   .detail-container table {
     width: 70%;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .card-parent {
+    grid-template-columns: repeat(1, 250px);
   }
 }

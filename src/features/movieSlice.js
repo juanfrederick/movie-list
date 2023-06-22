@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   typeValue: "",
   totalPage: 0,
-  page: 1,
+  page: 0,
 };
 
 const fetchMovies = createAsyncThunk("movies/fetchMovies", async (value) => {
@@ -34,6 +34,15 @@ const moviseSlice = createSlice({
       state.typeValue = action.payload;
       // state.page = 1;
     },
+    incrementPage: (state) => {
+      state.page = state.page + 1;
+    },
+    decrementPage: (state) => {
+      state.page = state.page - 1;
+    },
+    resetPage: (state) => {
+      state.page = 1;
+    },
   },
   extraReducers: {
     [fetchMovies.fulfilled]: (state, action) => {
@@ -54,6 +63,7 @@ const moviseSlice = createSlice({
   },
 });
 
-export const { changeValue } = moviseSlice.actions;
+export const { changeValue, incrementPage, decrementPage, resetPage } =
+  moviseSlice.actions;
 export { fetchMovies, fetchDetail };
 export default moviseSlice.reducer;
