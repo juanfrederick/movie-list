@@ -7,11 +7,14 @@ const initialState = {
   detail: {},
   isLoading: false,
   typeValue: "",
+  totalPage: 0,
+  page: 0,
 };
 
 const fetchMovies = createAsyncThunk("movies/fetchMovies", async (value) => {
+  const { typeValue, page } = value;
   const response = await fetch(
-    `http://www.omdbapi.com/?s=${value}&apikey=${apiKey}`
+    `http://www.omdbapi.com/?s=${typeValue}&apikey=${apiKey}&page=${page}`
   );
   const data = await response.json();
   return data;
@@ -29,12 +32,23 @@ const moviseSlice = createSlice({
   reducers: {
     changeValue: (state, action) => {
       state.typeValue = action.payload;
+      // state.page = 1;
+    },
+    incrementPage: (state) => {
+      state.page = state.page + 1;
+    },
+    decrementPage: (state) => {
+      state.page = state.page - 1;
+    },
+    resetPage: (state) => {
+      state.page = 1;
     },
   },
   extraReducers: {
     [fetchMovies.fulfilled]: (state, action) => {
       state.movies = action.payload;
       state.isLoading = false;
+      state.totalPage = Math.ceil(state.movies.totalResults / 10);
     },
     [fetchMovies.pending]: (state) => {
       state.isLoading = true;
@@ -49,6 +63,7 @@ const moviseSlice = createSlice({
   },
 });
 
-export const { changeValue } = moviseSlice.actions;
+export const { changeValue, incrementPage, decrementPage, resetPage } =
+  moviseSlice.actions;
 export { fetchMovies, fetchDetail };
 export default moviseSlice.reducer;
