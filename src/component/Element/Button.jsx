@@ -23,7 +23,7 @@ const Button = () => {
 
   return (
     <div className="button-container">
-      {page === 1 ? null : (
+      {page <= 1 ? null : (
         <button
           onClick={() => {
             prevPage();
@@ -32,7 +32,7 @@ const Button = () => {
           Prev
         </button>
       )}
-      {page === totalPage || totalPage === 0 ? null : (
+      {page === totalPage || page === 0 ? null : (
         <button
           onClick={() => {
             nextPage();
